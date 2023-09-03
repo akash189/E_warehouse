@@ -3,22 +3,33 @@ import Navbar from "./Navbar";
 import AdminNav from "./AdminNav";
 
 function Product_List() {
-  const productList = [
-    {
-      ID: "101",
-      name: "Refrigator",
-      Quantity: "200",
-      Facilithy_Type: "Non-Ac",
-      charges: "400",
-    },
-    {
-      ID: "102",
-      name: "Pepsi-Bottles",
-      Quantity: "100",
-      Facilithy_Type: "Ac",
-      charges: "400",
-    },
-  ];
+//   const productList = [
+//     {
+//       ID: "101",
+//       name: "Refrigator",
+//       Quantity: "200",
+//       Facilithy_Type: "Non-Ac",
+//       charges: "400",
+//     },
+//     {
+//       ID: "102",
+//       name: "Pepsi-Bottles",
+//       Quantity: "100",
+//       Facilithy_Type: "Ac",
+//       charges: "400",
+//     },
+//   ];
+
+  const [productList, setProduct] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:8080/warehouse/product/data").then(data => {
+        setProduct(data.data)
+    }
+    ).catch(
+      (error) => { console.error(error) }
+    )
+  }, [])
+
 
   return (
     <>

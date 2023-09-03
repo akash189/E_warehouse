@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import axios from "axios";
 
 
 function Add_Product() {
@@ -21,7 +22,6 @@ function Add_Product() {
             charges:"400"
         }
     ];
-
     
     var [product,setProduct] = useState([...productList]);
     var [productObj,setProductObj] = useState({});
@@ -35,8 +35,15 @@ function Add_Product() {
     // }
 
     let Add = () =>{
-        console.log(productObj)
-        setProduct([...product,productObj])
+        // console.log(productObj)
+        // setProduct([...product,productObj])
+
+        axios.post("http://localhost:8080/warehouse/product/add",productObj).then(responce=>{
+            console.log(responce.status)
+        }).catch((err)=>{
+          console.log(err);
+        })
+
         setProductObj({})
     }
 
@@ -59,12 +66,13 @@ function Add_Product() {
   return (
     <>
     <Navbar/>
+    <h4 className='text-center m-3'>Available space : </h4>
       <div className="container col-12 d-flex justify-content-center">
         {/* From Start for add product */}
         <div className="col-3"></div>
         <div className="form col-6 my-5 border p-4">
           <h4 className="text-center m-2">Add Product</h4>
-          <hr className="my-3" />
+          <hr className="my-3 " />
           <form>
             <div className="mb-3 d-flex">
               <div className="col-6">
@@ -130,7 +138,7 @@ function Add_Product() {
                 />
               </div>
             </div>
-            <button type="button" className="btn btn-outline-success m-3" onClick={calCharges}>
+            <button type="button" className="btn btn-outline-success m-2" onClick={calCharges}>
               Cal Charges
             </button>
             <button type="button" onClick={Add} className="btn btn-outline-success m-3">
@@ -141,10 +149,11 @@ function Add_Product() {
         <div className="col-3"></div>
         {/* From End */}
       </div>
-        <div className="htitle m-5">
-            <h3 className="text-center">Your Products</h3> 
-            <div id="headline"></div>           
-        </div>        
+      <div className="mainheadline">
+        <h4 className='text-center mt-3'>Available Products</h4>
+        <div className="headingunderline"></div>
+    </div>
+
       <div className="maincard m-3 p-3 d-flex flex-wrap">      
         {
             product.map((item,index)=>{

@@ -20,6 +20,17 @@ code {
 #bgimage{
   opacity: "0.2";
 }
+.headingunderline{
+  background-color: rgb(79, 104, 79);
+  border: 1px solid black;
+  height: 4px;
+  width:40px;
+  border-radius: 10px;
+  position: relative;
+  margin-left: 640px;
+  margin-bottom: 20px;
+
+}
 /* #headline{
   color:'green';
   width: "100px !important";
