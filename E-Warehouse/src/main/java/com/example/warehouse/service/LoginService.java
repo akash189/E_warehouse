@@ -2,8 +2,10 @@ package com.example.warehouse.service;
 
 import java.util.Map;
 
+import com.example.warehouse.model.Customer;
+
 public interface LoginService {
 
-	String loginUserAuth(Map<String, String> authdata);
+	Customer loginAuth(Map<String, String> authdata);
 
 }
