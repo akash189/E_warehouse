@@ -71,10 +71,10 @@ function Product_List() {
                 return (
                   <tr key={index} className="table-active">
                     <td>{index + 1}</td>
-                    <td>{val.ID}</td>
+                    <td>{val.id}</td>
                     <td>{val.name}</td>
-                    <td>{val.Quantity}</td>
-                    <td>{val.Facilithy_Type}</td>
+                    <td>{val.quantity}</td>
+                    <td>{val.facilityType}</td>
                     <td>{val.charges}</td>
                     <td>
                       <button

@@ -34,6 +34,7 @@ function Customers_List() {
   // ];
 
   const [customer, setCustomer] = useState([]);
+  
   useEffect(() => {
     axios.get("http://localhost:8080/warehouse/customer/data").then(data => {
       setCustomer(data.data)
@@ -42,6 +43,13 @@ function Customers_List() {
       (error) => { console.error(error) }
     )
   }, [])
+  let deleteData=(id) => {
+    axios.delete("http://localhost:8080/warehouse/customer/delete/"+id).then(data => {
+    }
+    ).catch(
+      (error) => { console.error(error) }
+    )
+  }
 
 
   return (
@@ -75,18 +83,18 @@ function Customers_List() {
                     <td>{val.city}</td>
                     <td>
                       <button
-                        // onClick={deleteData}
-                        // name={index}
+                        onClick={deleteData(val.id)}
+                        name={index}
                         className="btn btn-danger mx-2"
                       >
                         Delete
                       </button>
                       <button
-                        // onClick={deleteData}
-                        // name={index}
+                       // onClick={editData}
+                     //   name={index}
                         className="btn btn-warning mx-2"
                       >
-                        Delete
+                        Edit
                       </button>
                     </td>
                   </tr>

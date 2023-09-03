@@ -22,7 +22,7 @@ function Add_Product() {
             charges:"400"
         }
     ];
-    
+    var [availableSpace,setAvailableSpace] = useState(0);
     var [product,setProduct] = useState([...productList]);
     var [productObj,setProductObj] = useState({});
     var [FType,setFtype] = useState("");
@@ -46,6 +46,17 @@ function Add_Product() {
 
         setProductObj({})
     }
+    let space = () =>{
+      // console.log(productObj)
+      // setProduct([...product,productObj])
+
+      axios.get("http://localhost:8080/warehouse/availablespace",availableSpace).then(responce=>{
+          console.log(responce)
+          setAvailableSpace()
+      })
+
+      
+  }
 
     let calCharges = ()=>{
         let totalCharges = 0
@@ -66,7 +77,7 @@ function Add_Product() {
   return (
     <>
     <Navbar/>
-    <h4 className='text-center m-3'>Available space : </h4>
+    <h4 className='text-center m-3' onLoad={space}> Available space : {availableSpace} </h4>
       <div className="container col-12 d-flex justify-content-center">
         {/* From Start for add product */}
         <div className="col-3"></div>
@@ -90,17 +101,17 @@ function Add_Product() {
                 />
               </div>
               <div className="col-6">
-                <label htmlFor="Quantity" className="form-label">
+                <label htmlFor="quantity" className="form-label">
                   Quantity
                 </label>
                 <input
                   type="number"
                   className="form-control"
-                  id="Quantity"
+                  id="quantity"
                   required
                   onChange={(e)=>{
                    setQuentity(e.target.value)
-                   setProductObj({...productObj,['Quantity']:e.target.value})
+                   setProductObj({...productObj,['quantity']:e.target.value})
                   }}
                 />
               </div>
@@ -108,8 +119,8 @@ function Add_Product() {
             <div className="mb-3 d-flex">
               <div className="col-6">
                 <div className="form-group">
-                  <label htmlFor="Facilithy_Type">Facility Type</label>
-                  <select className="form-control" id="Facilithy_Type"
+                  <label htmlFor="facilityType">Facility Type</label>
+                  <select className="form-control" id="facilityType"
                   onChange={(e)=>{
                     setFtype(e.target.value)
                     setProductObj({...productObj,[e.target.id]:e.target.value})
@@ -122,13 +133,13 @@ function Add_Product() {
                 </div>
               </div>
               <div className="col-6">
-                <label htmlFor="Charges" className="form-label">
+                <label htmlFor="charges" className="form-label">
                   Total Charges
                 </label>
                 <input
                   type="number"
                   className="form-control"
-                  id="Charges"
+                  id="charges"
                   required
                 //   onChange={(e)=>{
                 //     setProductObj({...productObj,['charges']:e.target.value})

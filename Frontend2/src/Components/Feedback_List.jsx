@@ -37,7 +37,7 @@ function Feedback_List() {
               <td>Customer Name</td>              
               <td>Contact</td>
               <td>Comment</td> 
-              <td>Action</td>             
+                        
             </tr>
           </thead>
           <tbody>
@@ -49,22 +49,7 @@ function Feedback_List() {
                     <td>{val.name}</td>                    
                     <td>{val.contact}</td>
                     <td>{val.Comment}</td>
-                    <td>
-                      <button
-                        // onClick={deleteData}
-                        // name={index}
-                        className="btn btn-danger mx-2"
-                      >
-                        Delete
-                      </button>
-                      <button
-                        // onClick={deleteData}
-                        // name={index}
-                        className="btn btn-warning mx-2"
-                      >
-                        Edit
-                      </button>
-                    </td>
+                   
                   </tr>
                 );
               }

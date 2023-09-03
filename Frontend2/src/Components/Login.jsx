@@ -16,10 +16,10 @@ function Login() {
     axios
       .post("http://localhost:8080/warehouse/login", user)
       .then((responce) => {
-        console.log(responce.status);
-        if (responce.status == 200) {
+        //console.log(responce.status);
+        // if (responce.status == 200) {
           navigate("/AdminDashboard");
-        }
+        //}
       })
       .catch((err) => {
         console.log(err);
@@ -36,14 +36,14 @@ function Login() {
           <hr className="my-3" />
           <form>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">
+              <label htmlFor="username" className="form-label">
                 Email address
               </label>
               <input
                 type="email"
                 required
                 className="form-control"
-                id="email"
+                id="username"
                 aria-describedby="emailHelp"
                 placeholder="Enter Your Email"
                 onChange={onChangeHandler}
@@ -62,7 +62,7 @@ function Login() {
                 onChange={onChangeHandler}
               />
             </div>
-            {user.email === "admin@gmail.com" && user.password === "admin" && (
+            {user.username === "admin@gmail.com" && user.password === "admin" && (
               <button
                 type="button"
                 onClick={login}
@@ -72,13 +72,13 @@ function Login() {
               </button>
             )}
             <button
-              type="submit"
+              type="button"
               onClick={() => {
                 axios
                   .post("http://localhost:8080/warehouse/login", user)
                   .then((responce) => {
-                    console.log(responce.status);
-                    if (responce.status == 200) {
+                    console.log(responce.data);
+                    if (responce.data.id !=null) {
                       navigate("/Home");
                     }
                   })
