@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +42,11 @@ public class AdminController {
 	@Autowired
 	ProductService productService;
 
+	// For redirect to Admin Dashboard
+	@GetMapping("/dashboard")
+	public ModelAndView eadminDashboard() {
+		return new ModelAndView("AdminDashboard.jsp");
+	}
 
 	// For redirect to profile page
 	@PostMapping("/profile/admin/{id}")
@@ -59,7 +65,8 @@ public class AdminController {
 		return customerService.addCustomer(customer);
 	}
 
-	@PostMapping("/customer/data")
+	@GetMapping("/customer/data")
+	@CrossOrigin(origins = "http://localhost:3000")
 	public List<Customer> customerDetails() {
 		return customerService.getCustomerDetails();
 	}
