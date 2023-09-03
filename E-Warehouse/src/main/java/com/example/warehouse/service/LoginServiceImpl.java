@@ -20,16 +20,12 @@ public class LoginServiceImpl implements LoginService {
 	CustomerRepository customerRepository;
 
 	@Override
-	public String loginUserAuth(Map<String, String> authdata) {
+	public Customer loginAuth(Map<String, String> authdata) {
 		String username = authdata.get("username");
 		String password = authdata.get("password");
-		Admin admin = adminRepository.getReferenceByEmailAndPassword(username, password);
+//		Admin admin = adminRepository.getReferenceByEmailAndPassword(username, password);
 		Customer customer = customerRepository.getReferenceByEmailAndPassword(username, password);
-		if (admin != null || customer != null) {
-			return "login success";
-		} else {
-			return "*Invalid Credentials";
-		}
+		return customer;
 
 	}
 }
