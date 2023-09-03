@@ -6,9 +6,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,13 +51,13 @@ public class AdminController {
 	}
 
 	// For redirect to profile page
-	@PostMapping("/profile/admin/{id}")
+	@GetMapping("/profile/admin/{id}")
 	public Optional<Admin> profileData(@PathVariable("id") int id) {
 		Optional<Admin> admin = adminRepository.findById(id);
 		return admin;
 	}
 
-	@PostMapping("/profile/customer/{id}")
+	@GetMapping("/profile/customer/{id}")
 	public Customer profileDataCustomer(@PathVariable("id") int id) {
 		return customerService.getCustomerProfile(id);
 	}
@@ -71,18 +73,18 @@ public class AdminController {
 		return customerService.getCustomerDetails();
 	}
 
-	@PostMapping("/customer/data/{id}")
+	@GetMapping("/customer/data/{id}")
 	public Customer customerData(@PathVariable("id") int id) {
 		return customerService.getCustomerData(id);
 	}
 
 	// For update customer details
-	@PostMapping("customer/update")
+	@PutMapping("customer/update")
 	public String editCustomer(@RequestBody Customer customer) {
 		return customerService.editCustomerData(customer);
 	}
 
-	@PostMapping("customer/delete/{id}")
+	@DeleteMapping("customer/delete/{id}")
 	public String deleteCustomer(@PathVariable("id") int id) {
 		return customerService.deleteCustomerData(id);
 	}
@@ -93,22 +95,22 @@ public class AdminController {
 	}
 
 	// For update product details
-	@PostMapping("product/update")
+	@PutMapping("product/update")
 	public String editProduct(@RequestBody Product product) {
 		return productService.editProductDetails(product);
 	}
 
-	@PostMapping("product/delete/{id}")
+	@DeleteMapping("product/delete/{id}")
 	public String deleteProduct(@PathVariable("id") int id) {
 		return productService.deleteProductDetails(id);
 	}
 
-	@PostMapping("/product/data")
+	@GetMapping("/product/data")
 	public List<Product> productDetails() {
 		return productService.getProductDetails();
 	}
 
-	@PostMapping("/product/data/{id}")
+	@GetMapping("/product/data/{id}")
 	public Optional<Product> productData(@PathVariable("id") int id) {
 		return productService.getProductData(id);
 	}
@@ -118,7 +120,7 @@ public class AdminController {
 		return customerService.restCustomerPassword(passMap, id);
 	}
 
-	@PostMapping("/availablespace")
+	@GetMapping("/availablespace")
 	public long availableSpace() {
 		return productService.availableProductSpace();
 	}
